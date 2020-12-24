@@ -2,6 +2,7 @@ import re
 import time
 import pandas as pd
 import numpy as np
+import constants
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -20,7 +21,10 @@ def scrapLeaderboard():
 		data = []
 		rank = 0
 		errors = 0
-		for row in rows:
+		#variables to track progress
+		perc25 = len(rows)/4
+		prog_dic = dict([(int(perc25 * idx), str((perc25 * idx * 100) // len(rows)) + " percent") for idx in range(1,5)])
+		for idx, row in enumerate(rows, start=1):
 			rank += 1
 			name = "" 
 			clan = ""
@@ -48,6 +52,9 @@ def scrapLeaderboard():
 				pass
 			
 			data.append([rank, name, clan, sponsor, country_iso, flag_link])
+			#show progress
+			if idx in prog_dic:
+				print("scrapping...", prog_dic[idx], "done")
 
 		print("scrapping input errros:", errors)
 
@@ -56,19 +63,20 @@ def scrapLeaderboard():
 def saveLeaderBoard(data):
 	df = pd.DataFrame(data)
 	df.columns = ["rank", "name", "clan", "sponsor", "country iso", "flag link"]
-	file_name = "leaderboard.csv"
+	file_name = constants.LEADERBOARD_FILE
 	df.to_csv("generated/" + file_name, index=False)
+	print("wrote to", file_name)
 	return df
 
 def countCountries(df_data):
 	counter = {}
 	for idx, entry in df_data.iterrows():
 		key = entry["country iso"]
-		if type(key) is not str:
-			key = "unknown"
-		else:
+		if key:
 			#good idea forcing it to be lower for further comparisons
 			key = key.lower()
+		else:
+			key = constants.NO_COUNTRY_KEY
 
 		if key in counter:
 			counter[key] += 1
@@ -80,7 +88,7 @@ def countCountries(df_data):
 
 def saveCountryStats(count_dict):
 	iso_dict = {}
-	with open("generated/country_iso.csv", "r", encoding="utf8") as iso_file:
+	with open("generated/" + constants.COUNTRY_ISO_FILE, "r", encoding="utf8") as iso_file:
 		lines = iso_file.read().split("\n")
 		regex = re.compile(r"(\w+)[\,.]+([\w\W]+)$")
 		#Ignoring the first line, because it's a header
@@ -94,7 +102,7 @@ def saveCountryStats(count_dict):
 				print("invalid line", line, "exception", e)
 
 	#write full country names with stats to file
-	file_name = "country_stats.csv"
+	file_name = constants.COUNTRY_STATS_FILE
 	with open("generated/" + file_name, "w", encoding="utf8") as file:
 		file.write("country,total\n")
 		for code in count_dict:

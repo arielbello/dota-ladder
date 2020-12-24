@@ -1,5 +1,6 @@
 import pandas as pd
 import time
+import constants
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -24,6 +25,6 @@ with webdriver.Firefox() as driver:
 
 	df = pd.DataFrame(country_list)
 	df.columns = ['code', 'name']
-	file_name = "country_iso.csv"
+	file_name = constants.COUNTRY_ISO_FILE
 	df.to_csv('generated/'+ file_name, index=False, encoding="utf-8")
 	print("wrote to", file_name)
