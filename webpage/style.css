@@ -1,0 +1,16 @@
+h1 {
+	color: #FAFAFA;
+	text-align: center;
+	font-family: "Helvetica";
+	margin: 8vh 4vw 4vh;
+}
+
+body {
+	background-color: #1D1F20;
+}
+
+/*.chart-container {
+	height: 400vh;
+	width: 80vw;
+	margin: auto;
+}*/
