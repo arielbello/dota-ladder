@@ -10,7 +10,7 @@ function readTextFile(file, callback) {
 }
 
 //usage:
-readTextFile("/generated/country_stats.csv", function(text){
+readTextFile("/dota-ladder/generated/country_stats.csv", function(text){
     var lines = text.split("\n");
     var table = {};
     for (let i=1; i < lines.length; i++){
