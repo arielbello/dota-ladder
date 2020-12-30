@@ -9,8 +9,6 @@ body {
 	background-color: #1D1F20;
 }
 
-/*.chart-container {
-	height: 400vh;
-	width: 80vw;
-	margin: auto;
-}*/
+.chart-container {
+	margin: 0vh 10vw;
+}
