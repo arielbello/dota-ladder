@@ -6,3 +6,6 @@ generated/
 
 #logs
 *.log
+
+#IDE
+.idea/

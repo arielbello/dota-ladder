@@ -5,6 +5,7 @@ import time
 import pandas as pd
 import numpy as np
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -12,7 +13,12 @@ from selenium.webdriver.support.expected_conditions import presence_of_element_l
 from selenium.common.exceptions import NoSuchElementException
 
 def scrapLeaderboard():
-	with webdriver.Firefox() as driver:
+	#headless usage
+	driver_options = Options()
+	driver_options.add_argument("--headless")
+	driver_options.add_argument("--disable-extensions")
+	with webdriver.Firefox(options= driver_options) as driver:
+
 		driver.get("http://www.dota2.com/leaderboards#americas-0")
 		wait = WebDriverWait(driver, 10).until(lambda d: d.find_element(By.ID, "leaderboard_body"))
 		#unpredictable results with WebDriverWait, so we force wait
