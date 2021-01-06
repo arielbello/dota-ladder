@@ -1,8 +1,9 @@
+import constants
+import utils
 import re
 import time
 import pandas as pd
 import numpy as np
-import constants
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -23,7 +24,7 @@ def scrapLeaderboard():
 		errors = 0
 		#variables to track progress
 		perc25 = len(rows)/4
-		prog_dic = dict([(int(perc25 * idx), str((perc25 * idx * 100) // len(rows)) + " percent") for idx in range(1,5)])
+		prog_dic = dict([(int(perc25 * idx), str((perc25 * idx * 100) // len(rows)) + "%") for idx in range(1,5)])
 		for idx, row in enumerate(rows, start=1):
 			rank += 1
 			name = "" 
@@ -60,12 +61,14 @@ def scrapLeaderboard():
 
 	return data
 
-def saveLeaderBoard(data):
+def writeLeaderboardToCSV(data):
 	df = pd.DataFrame(data)
 	df.columns = ["rank", "name", "clan", "sponsor", "country iso", "flag link"]
 	file_name = constants.LEADERBOARD_FILE
-	df.to_csv("generated/" + file_name, index=False)
-	print("wrote to", file_name)
+	utils.create_folder_if_needed(constants.GENERATED_FOLDER)
+	path = constants.GENERATED_FOLDER + "/" + file_name
+	df.to_csv(path, index=False)
+	print("wrote to", path)
 	return df
 
 def countCountries(df_data):
@@ -86,13 +89,16 @@ def countCountries(df_data):
 	counter = sorted(counter.items(), key=lambda x: x[1], reverse=True)
 	return dict(counter)
 
-def saveCountryStats(count_dict):
+def writeCountryStatsCSV(count_dict):
 	iso_dict = {}
-	with open("generated/" + constants.COUNTRY_ISO_FILE, "r", encoding="utf8") as iso_file:
+	path = constants.GENERATED_FOLDER + "/" + constants.COUNTRY_ISO_CSV
+	with open(path, "r", encoding="utf8") as iso_file:
 		lines = iso_file.read().split("\n")
 		regex = re.compile(r"(\w+)[\,.]+([\w\W]+)$")
 		#Ignoring the first line, because it's a header
 		for line in lines[1:]:
+			if not line.strip():
+				continue
 			try:
 				match = regex.search(line)
 				code = match.groups()[0].lower()
@@ -102,22 +108,25 @@ def saveCountryStats(count_dict):
 				print("invalid line", line, "exception", e)
 
 	#write full country names with stats to file
-	file_name = constants.COUNTRY_STATS_FILE
-	with open("generated/" + file_name, "w", encoding="utf8") as file:
+	utils.create_folder_if_needed(constants.GENERATED_FOLDER)
+	path = constants.GENERATED_FOLDER + "/" + constants.COUNTRY_STATS_CSV
+	with open(path, "w", encoding="utf8") as file:
 		file.write("country,total\n")
 		for code in count_dict:
 			if code in iso_dict:
 				file.write(iso_dict[code] + "," + str(count_dict[code]) + "\n")
 			else:
-				print("warning country " + code + " not found!")
 				file.write(code + "," + str(count_dict[code]) + "\n")
-		print("wrote to", file_name)
+				if not code == constants.NO_COUNTRY_KEY:
+					print("warning country " + code + " not found!")
+		print("wrote to", path)
 
 
-#---Main---
-data = scrapLeaderboard()
-df = saveLeaderBoard(data)
-count_dict = countCountries(df)
-saveCountryStats(count_dict)
+def main():
+	data = scrapLeaderboard()
+	df = writeLeaderboardToCSV(data)
+	count_dict = countCountries(df)
+	writeCountryStatsCSV(count_dict)
 
-
+if __name__ == "__main__":
+	main()

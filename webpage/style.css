@@ -2,15 +2,21 @@ h1 {
 	color: #FAFAFA;
 	text-align: center;
 	font-family: "Helvetica";
-	margin: 8vh 4vw 4vh;
+	margin: 8vh 4vw 8vh;
 }
 
 body {
 	background-color: #1D1F20;
+	margin: 0;
 }
 
-/*.chart-container {
-	height: 400vh;
-	width: 80vw;
-	margin: auto;
-}*/
+.dataset-timestamp {
+	text-align: center;
+	color: #FAFAFA;
+	text-align: center;
+	font-family: "Helvetica";
+}
+
+.chart-container {
+	margin: 0vh 8vw 8vh;
+}
