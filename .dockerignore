@@ -1,0 +1,20 @@
+#Byte-compiled
+**/__pycache__/
+
+#generated resources
+**/generated/leaderboard_*
+**/generated/country_stats_*
+**/scripts/dataset_*
+
+#logs
+*.log
+
+#IDE
+.idea/
+
+#Secret
+
+#Other
+.gitignore
+LICENSE
+README.md
