@@ -40,7 +40,7 @@ def _write_string_to_file(input, file_path):
 def _build_dataset(name):
     source_path = Const.Files.GENERATED + "/" + Const.Files.COUNTRY_STATS_PREFIX + name + ".csv"
     output_path = Const.Files.WEB_FOLDER + "/" + Const.Files.SCRIPTS_FOLDER + "/" + \
-                  Const.Files.DATASET_PREFIX + name + ".js "
+                  Const.Files.DATASET_PREFIX + name + ".js"
     var_name = Const.Files.DATASET_PREFIX + name
     js_string = _leaderboard_to_js(source_path, var_name)
     _write_string_to_file(js_string, output_path)

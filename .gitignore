@@ -1,5 +1,6 @@
-#Byte-compiled
+#Python
 __pycache__/
+.virtualenv
 
 #generated resources
 **/generated/leaderboard_*

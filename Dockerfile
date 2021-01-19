@@ -23,4 +23,5 @@ ENV GOOGLE_APPLICATION_CREDENTIALS=/service_config/service-account.json
 
 EXPOSE 8080
 
-CMD ["gunicorn", "-w 2", "-b", "0.0.0.0:8080", "main:create_service()"]
+CMD ["gunicorn", "-w 1", "-b", "0.0.0.0:8080", "--timeout", "360",\
+ "--keep-alive", "360", "--graceful-timeout", "60", "main:create_service()"]
