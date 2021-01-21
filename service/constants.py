@@ -3,6 +3,7 @@ class Keys:
 
 
 class Files:
+    APP_LOG = "app_log.txt"
     GENERATED = "generated"
     WEB_FOLDER = "webpage"
     SCRIPTS_FOLDER = "scripts"

@@ -1,12 +1,12 @@
 from flask import Flask
 import time
+import utils
 import country_iso_scraper
 import leaderboard_scraper
 import webpage_builder
 import gcloud_storage_uploader
 
 app = Flask(__name__)
-
 
 @app.route("/")
 def index():
@@ -26,9 +26,12 @@ def run_service():
 
 
 def create_service():
-    gcloud_storage_uploader.startup_upload()
+    if utils.is_first_run():
+        gcloud_storage_uploader.startup_upload()
+        utils.log_write("First run. Uploaded first files.")
+
     return app
 
 
 if __name__ == "__main__":
-    create_service()
+    pass
