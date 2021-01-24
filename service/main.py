@@ -34,4 +34,5 @@ def create_service():
 
 
 if __name__ == "__main__":
+    # Gunicorn uses create_service() as entrypoint
     pass

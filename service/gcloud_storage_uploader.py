@@ -3,17 +3,14 @@ import os
 from google.cloud import storage
 
 
-def _upload_file(file_path, content_type, bucket_name=None, file_name=None):
+def _upload_file(file_path, content_type, cache_timeout=3600, bucket_name=None, file_name=None):
     """
 	Uploads a file to a google cloud storage bucket.
 	Requires prior google credentials setup (automatically done in a gcloud VM)
-
-	@param file_path: path to file to be uploaded
-	@param file_name: optional name for the uploaded file
-	@param bucket_name: name for the target storage bucket
 	"""
 
     if not bucket_name:
+        assert Const.Urls.STORAGE_BUCKET != None, "STORAGE_BUCKET env not set!"
         bucket_name = Const.Urls.STORAGE_BUCKET
 
     try:
@@ -22,6 +19,7 @@ def _upload_file(file_path, content_type, bucket_name=None, file_name=None):
         client = storage.Client()
         bucket = client.get_bucket(bucket_name)
         blob = storage.Blob(file_name, bucket)
+        blob.cache_control = f"max-age={cache_timeout}"
         with open(file_path, "rb") as file:
             blob.upload_from_file(file, content_type=content_type)
 
@@ -35,7 +33,7 @@ def _upload_dataset_from_region(region):
     file_name = Const.Files.DATASET_PREFIX + region + ".js"
     src_path = Const.Files.WEB_FOLDER + "/" + Const.Files.SCRIPTS_FOLDER + "/" + file_name
     dst_path = Const.Files.SCRIPTS_FOLDER + "/" + file_name
-    _upload_file(src_path, content_type, file_name=dst_path)
+    _upload_file(src_path, content_type, cache_timeout=60, file_name=dst_path)
 
 
 def update_datasets():

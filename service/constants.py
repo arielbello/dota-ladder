@@ -1,3 +1,5 @@
+import os
+
 class Keys:
     NO_COUNTRY_KEY = "country_not_found"
 
@@ -19,7 +21,8 @@ class Files:
 
 
 class Urls:
-    STORAGE_BUCKET = "fine-elf-286014.appspot.com"
+    # TODO set this environment variable
+    STORAGE_BUCKET = os.environ.get("STORAGE_BUCKET")
     INDEX = "http://www.dota2.com/leaderboards"
     AMERICAS_LEADERBOARD = "http://www.dota2.com/leaderboards#americas-0"
     SE_ASIA_LEADERBOARD = "http://www.dota2.com/leaderboards#europe-0"

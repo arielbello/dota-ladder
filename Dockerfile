@@ -1,25 +1,26 @@
 FROM debian:10-slim
 
-#All de Apts
+# All de Apts
 RUN apt update && apt install -y --no-install-recommends \
 	python3 \
 	python3-pip \
 	firefox-esr
 
-#Python packages
+# Python packages
 COPY requirements.txt service_config/
 RUN pip3 install -r service_config/requirements.txt
 
-#Copy project
-COPY service service
-WORKDIR service
-#Webdriver needed for selenium
-COPY geckodriver bin/
-#Add geckodriver to path
-ENV PATH="/service/bin:${PATH}"
-#REMOVE LATER google app credentials
-COPY service-account.json /service_config/
-ENV GOOGLE_APPLICATION_CREDENTIALS=/service_config/service-account.json
+# Copy project
+COPY . /app
+WORKDIR /app
+# Webdriver needed for selenium
+RUN mv geckodriver /usr/local/bin/
+RUN chmod 555 /usr/local/bin/geckodriver
+
+# REMOVE LATER google app credentials
+# COPY service-account.json /service_config/
+# ENV GOOGLE_APPLICATION_CREDENTIALS=/service_config/service-account.json
+WORKDIR service/
 
 EXPOSE 8080
 
