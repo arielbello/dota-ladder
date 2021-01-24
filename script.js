@@ -1,35 +1,21 @@
-function readTextFile(file, callback) {
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, true);
-    rawFile.onreadystatechange = function() {
-        if (rawFile.readyState === 4 && rawFile.status == "200") {
-            callback(rawFile.responseText);
-        }
-    }
-    rawFile.send(null);
+function main(){
+    //dataset_americas is imported from dataset_americas.js
+    setupTable(dataset_americas);
+    //same for timestamp
+    setupTimestamp(dataset_americas_timestamp);
 }
 
-//usage:
-readTextFile("/dota-ladder/generated/country_stats.csv", function(text){
-    var lines = text.split("\n");
-    var table = {};
-    for (let i=1; i < lines.length; i++){
-        let regex = /(?<country>[\w\W]+?),(?<num>\d+)/;
-        let data = lines[i].match(regex);
-        if (!data || data.length < 3){
-            console.log("error reading country stats");
-        }
-        else {
-            if (data.groups.country == "country_not_found") {
-                data.groups.country = "No country info";
-            }
-            table[data.groups.country] = data.groups.num;
-        }
-    }
-    populateTable(table);
-});
+function setupTimestamp(timestamp){
+    let el = document.getElementsByClassName("dataset-timestamp")[0];
+    el.hidden = false;
+    //Date in Javascript is in miliseconds since 1970, while python use seconds
+    let date = new Date(timestamp * 1000);
+    el.innerHTML = "last updated: " + date.toLocaleTimeString() + ", " + date.toLocaleDateString();
+    console.log(el.text);
+}
 
-function populateTable(data){
+//Configure and load the dataset into the table
+function setupTable(data){
     var ctx = document.getElementById('country_chart').getContext('2d');
     let numCountries = Object.keys(data).length;
     let maxNum = Object.values(data)[0];
@@ -91,3 +77,39 @@ function populateTable(data){
     chart.canvas.parentNode.style.height = String(numCountries * 30) + "px";
 }
 
+//load a static text file asynchronously
+function readTextFile(file, callback) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, true);
+    rawFile.onreadystatechange = function() {
+        if (rawFile.readyState === 4 && rawFile.status == "200") {
+            callback(rawFile.responseText);
+        }
+    }
+    rawFile.send(null);
+}
+
+//load country stats into a dictionary
+function onCountryDataLoad(text) {
+    var lines = text.split("\n");
+    var table = {};
+    for (let i=1; i < lines.length; i++){
+        let regex = /(?<country>[\w\W]+?),(?<num>\d+)/;
+        let data = lines[i].match(regex);
+        if (!data || data.length < 3){
+            console.log("error reading country stats");
+        }
+        else {
+            if (data.groups.country == "country_not_found") {
+                data.groups.country = "No country info";
+            }
+            table[data.groups.country] = data.groups.num;
+        }
+    }
+    setupTable(table);
+}
+
+//Not using asynchronous load for now
+//readTextFile("/scrapping/generated/country_stats.csv", onCountryDataLoad);
+
+main();

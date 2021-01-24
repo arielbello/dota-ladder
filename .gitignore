@@ -1,8 +1,17 @@
-#Byte-compiled
+#Python
 __pycache__/
+.virtualenv
 
 #generated resources
-generated/
+**/generated/leaderboard_*
+**/generated/country_stats_*
+**/scripts/dataset_*
 
 #logs
 *.log
+
+#IDE
+.idea/
+
+#Secret
+service-account.json
