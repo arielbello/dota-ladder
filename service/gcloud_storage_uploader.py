@@ -41,6 +41,7 @@ def update_datasets():
     _upload_dataset_from_region(Const.Regions.EUROPE)
     _upload_dataset_from_region(Const.Regions.SE_ASIA)
     _upload_dataset_from_region(Const.Regions.CHINA)
+    _upload_dataset_from_region(Const.Regions.GLOBAL)
 
 
 def startup_upload():
