@@ -25,8 +25,8 @@ class Urls:
     STORAGE_BUCKET = os.environ.get("STORAGE_BUCKET")
     INDEX = "http://www.dota2.com/leaderboards"
     AMERICAS_LEADERBOARD = "http://www.dota2.com/leaderboards#americas-0"
-    SE_ASIA_LEADERBOARD = "http://www.dota2.com/leaderboards#europe-0"
-    EUROPE_LEADERBOARD = "http://www.dota2.com/leaderboards#se_asia-0"
+    EUROPE_LEADERBOARD = "http://www.dota2.com/leaderboards#europe-0"
+    SE_ASIA_LEADERBOARD = "http://www.dota2.com/leaderboards#se_asia-0"
     CHINA_LEADERBOARD = "http://www.dota2.com/leaderboards#china-0"
     COUNTRY_ISO = "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2"
 
@@ -35,3 +35,4 @@ class Regions:
     SE_ASIA = "seasia"
     EUROPE = "europe"
     CHINA = "china"
+    GLOBAL = "global"
