@@ -28,7 +28,7 @@ def _get_data():
         except TimeoutException:
             print("Time exceeded, ", TimeoutException)
         # unpredictable results with WebDriverWait, so we force wait
-        time.sleep(4)
+        time.sleep(3)
         table = driver.find_element(By.CSS_SELECTOR, "table.wikitable.sortable")
         table_body = table.find_element(By.TAG_NAME, "tbody")
         rows = table_body.find_elements(By.TAG_NAME, "tr")
@@ -54,3 +54,7 @@ def scrape():
     df = _get_data()
     path = Const.Files.GENERATED + "/" + Const.Files.COUNTRY_ISO
     _save_dataframe_to_csv(df, path)
+
+
+if __name__ == "__main__":
+    scrape()

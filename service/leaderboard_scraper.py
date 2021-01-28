@@ -153,3 +153,7 @@ def scrape():
     _scrape_region(Const.Urls.EUROPE_LEADERBOARD, Const.Regions.EUROPE)
     _scrape_region(Const.Urls.SE_ASIA_LEADERBOARD, Const.Regions.SE_ASIA)
     _scrape_region(Const.Urls.CHINA_LEADERBOARD, Const.Regions.CHINA)
+
+
+if __name__ == "__main__":
+    scrape()

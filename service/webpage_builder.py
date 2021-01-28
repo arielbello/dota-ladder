@@ -85,3 +85,6 @@ def build():
         _build_dataset(Const.Regions.CHINA)
     ]
     _build_global_dataset(datasets)
+
+if __name__ == "__main__":
+    build()
