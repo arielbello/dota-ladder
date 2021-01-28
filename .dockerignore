@@ -1,5 +1,6 @@
-#Byte-compiled
-**/__pycache__/
+#Python
+**/__pycache__
+**/.virtualenv
 
 #generated resources
 **/generated/leaderboard_*
@@ -9,13 +10,17 @@
 #logs
 *.log
 
+
 #IDE
 .idea/
+
+#GIT
+.gitignore
+.git
 
 #Secret
 **/service-account.json
 
 #Other
-.gitignore
 LICENSE
 README.md
