@@ -1,8 +1,8 @@
 h1 {
 	color: #FAFAFA;
 	text-align: center;
-	font-family: "Helvetica";
-	margin: 8vh 4vw 8vh;
+	font-family: Arial;
+	margin: 8vh 4vw 2vh;
 }
 
 body {
@@ -10,13 +10,40 @@ body {
 	margin: 0;
 }
 
-.dataset-timestamp {
-	text-align: center;
-	color: #FAFAFA;
-	text-align: center;
-	font-family: "Helvetica";
+nav {
+    margin: 60px 0 0 0;
 }
 
-.chart-container {
-	margin: 0vh 8vw 8vh;
+a.selected {
+    text-decoration: underline;
+    font-weight: bold;
+    color: #FAFAFA;
+}
+
+.nav-item {
+    margin: 20px;
+    font-size: 20px;
+    color: #CACACA;
+    font-family: Helvetica;
+    text-decoration: none;
+}
+
+.center {
+	display: flex;
+    justify-content: center;
+}
+
+#timestamp {
+    margin: 0 0 12vh 0;
+	color: #DADADA;
+	font-size: 14px;
+	font-weight: light;
+	font-family: Roboto;
+}
+
+#chart-container {
+    margin: auto;
+    margin-top: 2vh;
+	width: 90%;
+	height: 200%;
 }

@@ -1,3 +1,6 @@
+#not needed for web branch
+/service
+
 #Python
 __pycache__/
 .virtualenv
