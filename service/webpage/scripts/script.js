@@ -88,14 +88,33 @@ function loadTimestamp(timestamp){
     el.innerHTML = "Last updated: " + date.toLocaleTimeString() + ", " + date.toLocaleDateString();
 }
 
+function processLabels(labels) {
+//            if (data.groups.country == "country_not_found") {
+//                data.groups.country = "No country info";
+    var out = [];
+    var newLabel = "";
+    labels.forEach(label=>{
+        if (label == "country_not_found") {
+            newLabel = "No country information";
+        }
+        else if (label.length >= 27) {
+            newLabel = label.slice(0, 27).padEnd(30, ".");
+        }
+        else {
+            newLabel = label;
+        }
+
+        out.push(newLabel);
+    });
+    return out;
+}
+
 //Configure and load the dataset into the table
 function loadTable(data) {
     if (chart) {
-        chart.clear();
-        chart.data.labels = [];
-        chart.data.datasets = [];
-        chart.update();
-//        return;
+//        chart.data.labels = [];
+//        chart.data.datasets = [];
+        chart.destroy();
     }
 
     let numCountries = Object.keys(data).length;
@@ -106,15 +125,21 @@ function loadTable(data) {
 
     //Resizes the chart to fit the size of the dataset
     //otherwise it arbitrarily chooses it's size
-    var chartDiv = document.getElementById("chart-container");
-    chartDiv.style.height = String(numCountries * 30) + "px";
+    var chartHeight = numCountries * 30;
+    chartHeight = chartHeight < 50 ? 50 : chartHeight;
+    let chartDiv = document.getElementById("chart-container");
+    chartDiv.style.height = String(chartHeight) + "px";
 
+    let labels = processLabels(Object.keys(data));
+
+    //Chart creation with A LOT of options
     chart = new Chart(ctx, {
 
     type: "horizontalBar",
+    showTooltips:false,
 
     data: {
-        labels: Object.keys(data),
+        labels: labels,
         datasets: [{
             label: 'players',
             backgroundColor: "rgba(180,200,132,0.2)",
@@ -131,13 +156,23 @@ function loadTable(data) {
     },
 
     options: {
-        responsive: true,
-        maintainAspectRatio: false,
+        aspectRatio: chartDiv.clientWidth / chartHeight,
+        maintainAspectRatio: true,
+        hover: {
+            animationDuration: 0,
+        },
         legend: {
             display: true,
             position: "right",
             align: "start"
-
+        },
+        plugins: {
+            datalabels: {
+                color: "#CACACA",
+//                align: "end",
+//                anchor: "left",
+                clamp: true,
+            }
         },
         title: {
             display: false,
@@ -160,6 +195,7 @@ function loadTable(data) {
 
                 ticks: {
                     // suggestedMax: maxNum
+
                 }
             }]
         }

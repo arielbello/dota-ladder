@@ -42,7 +42,8 @@ a.selected {
 }
 
 #chart-container {
-    margin: 2vh 0 2vh 0;
+    margin: auto;
+    margin-top: 2vh;
 	width: 90%;
 	height: 200%;
 }

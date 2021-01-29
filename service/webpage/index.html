@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="style.css?v=1.25">
 <meta charset="utf-8">
 <title>Dota Ladder Stats</title>
-<!-- <link rel=”stylesheet” href=”style.css”> -->
 </head>
 
 <body>
@@ -21,12 +20,14 @@
     <a id="nav-item-global" class="nav-item" href="#">All regions</a>
 </nav>
 
-<div id="chart-container" class="center">
+<div id="chart-container">
 <canvas id="country_chart"></canvas>
 </div>
 
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+<!--Display bar values -->
+<!--<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>-->
 <script	src="scripts/dataset_americas.js"></script>
 <script	src="scripts/dataset_europe.js"></script>
 <script	src="scripts/dataset_seasia.js"></script>
