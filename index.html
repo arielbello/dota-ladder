@@ -2,7 +2,6 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://storage.googleapis.com/dota-leaderboard/style.css">
-<!--<link rel="stylesheet" href="style.css?v=1.25">-->
 <meta charset="utf-8">
 <title>Dota Ladder Stats</title>
 </head>
@@ -11,8 +10,6 @@
 
 <h1>DOTA 2 LEADERBOARDS COUNTRY STATS</h1>
 
-<p id="timestamp" class="center" hidden>Last updated:</p>
-
 <nav class="center">
     <a id="nav-item-americas" class="nav-item" href="#">Americas</a>
     <a id="nav-item-europe" class="nav-item" href="#">Europe</a>
@@ -20,6 +17,7 @@
     <a id="nav-item-china" class="nav-item" href="#">China</a>
     <a id="nav-item-global" class="nav-item" href="#">All regions</a>
 </nav>
+<p id="timestamp" class="center" hidden>Last updated:</p>
 
 <div id="chart-container">
 <canvas id="country_chart"></canvas>
@@ -27,12 +25,12 @@
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
-<!--<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>-->
+<!--Display bar values -->
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 <script	src="https://storage.googleapis.com/dota-leaderboard/scripts/dataset_americas.js"></script>
 <script	src="https://storage.googleapis.com/dota-leaderboard/scripts/dataset_europe.js"></script>
 <script	src="https://storage.googleapis.com/dota-leaderboard/scripts/dataset_seasia.js"></script>
 <script	src="https://storage.googleapis.com/dota-leaderboard/scripts/dataset_china.js"></script>
 <script	src="https://storage.googleapis.com/dota-leaderboard/scripts/dataset_global.js"></script>
 <script src="https://storage.googleapis.com/dota-leaderboard/scripts/script.js"></script>
-<!--<script src="script.js"></script>-->
 </html>
