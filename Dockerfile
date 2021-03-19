@@ -1,6 +1,6 @@
 FROM debian:10-slim
 
-# All de Apts
+# All the apt
 RUN apt update && apt install -y --no-install-recommends \
 	python3 \
 	python3-pip \
@@ -13,6 +13,7 @@ RUN pip3 install -r service_config/requirements.txt
 # Copy project
 COPY . /app
 WORKDIR /app
+
 # Webdriver needed for selenium
 RUN mv geckodriver /usr/local/bin/
 RUN chmod 555 /usr/local/bin/geckodriver
