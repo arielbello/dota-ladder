@@ -1,32 +1,49 @@
-h1 {
-	color: #EAEAEA;
-	text-align: center;
-	font-family: Arial;
-	margin: 60px 20px 100px;
-}
-
 body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
 	background-color: #1D1F20;
 	margin: 0;
 }
 
 nav {
+    font-weight: bold;
     margin: 20px 0 30px 0;
     border-bottom: solid 1px gray;
     border-top: solid 1px gray;
 }
 
+.title {
+    font-weight: bold;
+    color: #EEE;
+    text-align: center;
+    margin: 60px 20px 50px;
+}
+
+.description {
+    font-style: italic;
+    color: #BBB;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.description a {
+    color:inherit;
+}
+
+a:hover {
+    color: #FFF;
+}
+
 a.selected {
     text-decoration: underline;
     font-weight: bold;
-    color: #EAEAEA;
+    color: #EEE;
 }
 
 .nav-item {
     margin: 20px;
     font-size: 20px;
-    color: #CACACA;
-    font-family: Helvetica;
+    color: #BBB;
     text-decoration: none;
 }
 
@@ -37,15 +54,15 @@ a.selected {
 
 #timestamp {
     margin: 10px;
-	color: #DADADA;
+    font-style: italic;
+	color: #BBB;
 	font-size: 16px;
-	font-weight: light;
-	font-family: Roboto;
 }
 
 #chart-container {
     margin: auto;
     margin-top: 20px;
+    margin-bottom: 40px;
 	width: 90%;
 	height: 200%;
 }

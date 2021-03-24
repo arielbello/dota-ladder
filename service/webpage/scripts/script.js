@@ -13,6 +13,8 @@ const NAV_ITEM_GLOBAL = "nav-item-global";
 
 
 function main(){
+    Chart.defaults.global.defaultFontFamily= "Roboto";
+    Chart.defaults.global.defaultFontStyle= "normal";
     registerTooltipCustomPositioning();
     let navItemAmericas = document.getElementById(NAV_ITEM_AMERICAS);
     let navItemEurope = document.getElementById(NAV_ITEM_EUROPE);
