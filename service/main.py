@@ -25,10 +25,9 @@ def run_service():
     return "Success! It only took " + "{0:.1f}".format(task_time) + " seconds"
 
 
-def create_service():
-    if utils.is_first_run():
-        gcloud_storage_uploader.startup_upload()
-        utils.log_write("First run. Uploaded first files.")
+def create_service():    
+    gcloud_storage_uploader.startup_upload()
+    utils.log_write("First run. Uploaded first files.")
 
     return app
 
